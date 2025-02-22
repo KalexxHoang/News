@@ -32,7 +32,11 @@ fun NavGraph(
             route = Route.NewsNavigation.route,
             startDestination = Route.HomeScreen.route
         ) {
+            composable(
+                route = Route.HomeScreen.route
+            ) {
 
+            }
         }
     }
 }

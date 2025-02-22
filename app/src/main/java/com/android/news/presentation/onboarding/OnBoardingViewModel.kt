@@ -17,7 +17,7 @@ class OnBoardingViewModel @Inject constructor(
         Log.d(TAG, "onEvent: $event")
         when(event) {
             is OnBoardingEvent.SaveAppEntry -> {
-                saveAppEntry()
+                saveUserEntry()
             }
 
             else -> {
@@ -26,10 +26,9 @@ class OnBoardingViewModel @Inject constructor(
         }
     }
 
-    private fun saveAppEntry() {
-        Log.d(TAG, ": ")
+    private fun saveUserEntry() {
         viewModelScope.launch {
-            saveAppEntry.saveAppEntry()
+            saveAppEntry()
         }
     }
 }

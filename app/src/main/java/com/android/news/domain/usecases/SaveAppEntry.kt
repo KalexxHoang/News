@@ -6,7 +6,7 @@ import javax.inject.Inject
 class SaveAppEntry @Inject constructor(
     private val localUserManager: LocalUserManager
 ) {
-    suspend fun saveAppEntry() {
+    suspend operator fun invoke() {
         localUserManager.saveAppEntry()
     }
 }
