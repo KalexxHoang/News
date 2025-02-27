@@ -3,7 +3,7 @@ package com.android.news.presentation.onboarding
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.android.news.domain.usecases.SaveAppEntry
+import com.android.news.domain.usecases.appentry.SaveAppEntry
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import com.android.news.util.TAG
