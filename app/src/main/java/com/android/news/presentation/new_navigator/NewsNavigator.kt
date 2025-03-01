@@ -55,6 +55,12 @@ fun NewsNavigator() {
 
             })
         }
+
+        composable(
+            route = Route.DetailsScreen.route
+        ) {
+
+        }
     }
 }
 
