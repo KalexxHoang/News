@@ -1,5 +1,9 @@
 package com.android.news.di
 
+import android.app.Application
+import androidx.room.Room
+import com.android.news.data.local.NewsDao
+import com.android.news.data.local.NewsDatabase
 import com.android.news.data.remote.NewsApi
 import com.android.news.util.Constants.BASE_URL
 import dagger.Module
@@ -22,4 +26,16 @@ object AppModule {
             .build()
             .create(NewsApi::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun provideNewsDatabase(application: Application): NewsDatabase
+        = Room.databaseBuilder(context = application, klass = NewsDatabase::class.java, name = "news_db")
+        .fallbackToDestructiveMigration()
+        .build()
+
+    @Provides
+    @Singleton
+    fun provideNewsDao(newsDatabase: NewsDatabase): NewsDao
+        = newsDatabase.newsDao
 }
