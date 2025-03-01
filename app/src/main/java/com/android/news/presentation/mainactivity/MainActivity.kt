@@ -29,6 +29,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
         enableEdgeToEdge()
+        actionBar?.hide()
         installSplashScreen().setKeepOnScreenCondition {
             viewModel.splashCondition.value
         }
