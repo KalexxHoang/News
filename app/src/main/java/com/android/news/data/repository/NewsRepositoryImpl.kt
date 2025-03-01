@@ -13,11 +13,11 @@ import javax.inject.Inject
 class NewsRepositoryImpl @Inject constructor(
     private val newsApi: NewsApi,
 ) : NewsRepository {
-    override fun getNews(sources: String): Flow<PagingData<Article>> {
+    override fun getNews(sources: List<String>): Flow<PagingData<Article>> {
         return Pager(
             config = PagingConfig(pageSize = 10),
             pagingSourceFactory = {
-                NewsPagingSource(newsApi = newsApi, sources = sources)
+                NewsPagingSource(newsApi = newsApi, sources = sources.joinToString(separator = ","))
             }
         ).flow
     }

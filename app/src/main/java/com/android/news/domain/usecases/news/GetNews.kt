@@ -9,7 +9,7 @@ import javax.inject.Inject
 class GetNews @Inject constructor(
     private val newsRepository: NewsRepository
 ) {
-    operator fun invoke(sources: String): Flow<PagingData<Article>> {
+    operator fun invoke(sources: List<String>): Flow<PagingData<Article>> {
         return newsRepository.getNews(sources)
     }
 }
