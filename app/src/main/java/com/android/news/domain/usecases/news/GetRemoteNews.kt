@@ -6,10 +6,10 @@ import com.android.news.domain.repository.NewsRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class SearchNews @Inject constructor(
+class GetRemoteNews @Inject constructor(
     private val newsRepository: NewsRepository
 ) {
-    operator fun invoke(sources: List<String>, searchQuery: String): Flow<PagingData<Article>> {
-        return newsRepository.searchNews(sources = sources, searchQuery = searchQuery)
+    operator fun invoke(sources: List<String>): Flow<PagingData<Article>> {
+        return newsRepository.getRemoteNews(sources)
     }
 }

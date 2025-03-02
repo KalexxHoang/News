@@ -4,10 +4,10 @@ import com.android.news.domain.model.Article
 import com.android.news.domain.repository.NewsRepository
 import javax.inject.Inject
 
-class GetNews @Inject constructor(
+class InsertNews @Inject constructor(
     private val newsRepository: NewsRepository
 ) {
-    suspend operator fun invoke(url: String): Article? {
-        return newsRepository.getNews(url)
+    suspend operator fun invoke(article: Article) {
+        newsRepository.insertNews(article)
     }
 }

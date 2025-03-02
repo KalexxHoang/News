@@ -3,6 +3,7 @@ package com.android.news.data.repository
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import com.android.news.data.local.NewsDao
 import com.android.news.data.remote.NewsApi
 import com.android.news.data.remote.NewsPagingSource
 import com.android.news.data.remote.SearchNewsPagingSource
@@ -13,8 +14,9 @@ import javax.inject.Inject
 
 class NewsRepositoryImpl @Inject constructor(
     private val newsApi: NewsApi,
+    private val newsDao: NewsDao
 ) : NewsRepository {
-    override fun getNews(sources: List<String>): Flow<PagingData<Article>> {
+    override fun getRemoteNews(sources: List<String>): Flow<PagingData<Article>> {
         return Pager(
             config = PagingConfig(pageSize = 10),
             pagingSourceFactory = {
@@ -23,7 +25,7 @@ class NewsRepositoryImpl @Inject constructor(
         ).flow
     }
 
-    override fun searchNews(sources: List<String>, searchQuery: String): Flow<PagingData<Article>> {
+    override fun searchRemoteNews(sources: List<String>, searchQuery: String): Flow<PagingData<Article>> {
         return Pager(
             config = PagingConfig(pageSize = 10),
             pagingSourceFactory = {
@@ -34,5 +36,21 @@ class NewsRepositoryImpl @Inject constructor(
                 )
             }
         ).flow
+    }
+
+    override fun getNewsList(): Flow<List<Article>> {
+        return newsDao.getNews()
+    }
+
+    override suspend fun getNews(url: String): Article? {
+        return newsDao.getNews(url = url)
+    }
+
+    override suspend fun insertNews(article: Article) {
+        newsDao.insertNews(article)
+    }
+
+    override suspend fun deleteNews(article: Article) {
+        newsDao.deleteNews(article)
     }
 }
