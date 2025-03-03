@@ -1,4 +1,4 @@
-package com.android.news
+package com.alexxx_hoang.news
 
 import org.junit.Test
 

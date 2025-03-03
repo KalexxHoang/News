@@ -1,0 +1,34 @@
+package com.alexxx_hoang.news.presentation.onboarding
+
+import android.util.Log
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.alexxx_hoang.news.domain.usecases.appentry.SaveAppEntry
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
+import com.alexxx_hoang.news.util.TAG
+import kotlinx.coroutines.launch
+
+@HiltViewModel
+class OnBoardingViewModel @Inject constructor(
+    private val saveAppEntry: SaveAppEntry
+) : ViewModel() {
+    fun onEvent(event: OnBoardingEvent) {
+        Log.d(TAG, "onEvent: $event")
+        when(event) {
+            is OnBoardingEvent.SaveAppEntry -> {
+                saveUserEntry()
+            }
+
+            else -> {
+
+            }
+        }
+    }
+
+    private fun saveUserEntry() {
+        viewModelScope.launch {
+            saveAppEntry()
+        }
+    }
+}

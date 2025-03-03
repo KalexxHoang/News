@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace = "com.android.news"
+    namespace = "com.alexxx_hoang.news"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.android.news"
+        applicationId = "com.alexxx_hoang.news"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
