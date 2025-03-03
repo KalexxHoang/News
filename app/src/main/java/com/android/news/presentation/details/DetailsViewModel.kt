@@ -1,5 +1,6 @@
 package com.android.news.presentation.details
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.android.news.domain.model.Article
@@ -43,11 +44,13 @@ class DetailsViewModel @Inject constructor(
     }
 
     private suspend fun deleteArticle(article: Article) {
+        Log.d("DetailsViewModel", "Delete: $article")
         deleteNews(article = article)
         sendEffect(UIComponents.Toast("Article Deleted"))
     }
 
     private suspend fun insertArticle(article: Article) {
+        Log.d("DetailsViewModel", "Insert: $article")
         insertNews(article = article)
         sendEffect(UIComponents.Toast("Article Inserted"))
     }

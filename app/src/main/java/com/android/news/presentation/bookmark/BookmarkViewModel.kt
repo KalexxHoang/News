@@ -1,13 +1,14 @@
 package com.android.news.presentation.bookmark
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.android.news.domain.usecases.news.GetNewsList
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,12 +24,11 @@ class BookmarkViewModel @Inject constructor(
     }
 
     private fun getArticles() {
-        viewModelScope.launch {
-            getNewsList().onEach { articles ->
-                _state.value = _state.value.copy(
-                    articles = articles
-                )
-            }
-        }
+        getNewsList().onEach { articles ->
+            Log.d("BookmarkViewModel", "Bookmark articles: $articles")
+            _state.value = _state.value.copy(
+                articles = articles
+            )
+        }.launchIn(viewModelScope)
     }
 }
